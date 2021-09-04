@@ -92,4 +92,6 @@ def read_and_process_data(images_data_path, keyspace, http_server_url,
                                                                     lit('"  width="150" height="200">')))
     image_features_df.write.mode("append").partitionBy("image_path").saveAsTable(
         "myCatalog."+ keyspace +"."+ image_features_table_name)
+    spark.stop()
     print("Image features data written to table "+image_features_table_name)
+    return 1

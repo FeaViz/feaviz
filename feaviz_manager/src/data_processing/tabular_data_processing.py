@@ -1,8 +1,5 @@
 from pyspark.sql import SparkSession, SQLContext
-from pyspark.sql.functions import col, from_unixtime
 from pyspark.sql.functions import *
-from pyspark.sql.types import *
-from pyspark.ml.feature import StringIndexer
 
 def get_transpose_df(df, columns, pivotCol):
     columnsValue = list(map(lambda x: str("'") + str(x) + str("',")  + str(x), columns))
@@ -35,13 +32,30 @@ def create_feature_summary(spark, features_df):
                                                    ).withColumnRenamed("75%", "top_75")
     return summary_df
 
-def read_and_process_tabular_data(table_name, keyspace):
+def read_and_process_tabular_data(data_path, keyspace, file_store="local"):
+    table_name = data_path.split("/")[-1].split(".")[0]
+    if file_store=="local":
+        file_path_with_store = "file://" + data_path
+    else:
+        file_path_with_store = data_path
     summary_table_name = table_name + "_summary"
     spark = SparkSession.builder.appName("tabular_data_processing").getOrCreate()
     spark.conf.set("spark.sql.catalog.myCatalog", "com.datastax.spark.connector.datasource.CassandraCatalog")
 
-    features_df = spark.read.format("org.apache.spark.sql.cassandra"
-                                ).options(table=table_name, keyspace=keyspace).load()
+    features_df = spark.read.option("inferSchema", "true").csv(
+        file_path_with_store,
+        header=True)
+
     summary_df = create_feature_summary(spark, features_df)
-    summary_df.write.mode("append").partitionBy("summary").saveAsTable("myCatalog."+keyspace+"."+summary_table_name)
+    summary_df.write.mode("append").partitionBy("summary").saveAsTable(
+        "myCatalog." + keyspace + "." + summary_table_name)
+    try:
+        partition_key = summary_df.filter(col("distinct_count") == lit(features_df.count())).select(
+            "summary").toPandas().values[0][0]
+    except IndexError or KeyError:
+        features_df = features_df.select("*").withColumn("partition_key_id", monotonically_increasing_id())
+        partition_key= "partition_key_id"
+    features_df.write.mode("append").partitionBy(partition_key).saveAsTable("myCatalog."+keyspace+"."+table_name)
+    spark.stop()
     print("summary table created in astra " + summary_table_name)
+    return 1
