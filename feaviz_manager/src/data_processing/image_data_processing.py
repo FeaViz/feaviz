@@ -1,14 +1,11 @@
 import cv2
 import findspark
 findspark.init()
-import pyspark
-from pyspark.sql import Row
-from pyspark.sql import SparkSession, SQLContext
-from pyspark.sql.functions import col, from_unixtime
+from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from pyspark.ml.feature import StringIndexer
 import numpy as np
+from fastapi.logger import logger
 
 
 def get_desc(img, network, labels, threshold, probability_minimum):
@@ -93,5 +90,5 @@ def read_and_process_data(images_data_path, keyspace, http_server_url,
     image_features_df.write.mode("append").partitionBy("image_path").saveAsTable(
         "myCatalog."+ keyspace +"."+ image_features_table_name)
     spark.stop()
-    print("Image features data written to table "+image_features_table_name)
+    logger.info("Image features data written to table "+image_features_table_name)
     return 1

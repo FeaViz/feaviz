@@ -1,5 +1,6 @@
 from pyspark.sql import SparkSession, SQLContext
 from pyspark.sql.functions import *
+from fastapi.logger import logger
 
 def get_transpose_df(df, columns, pivotCol):
     columnsValue = list(map(lambda x: str("'") + str(x) + str("',")  + str(x), columns))
@@ -57,5 +58,5 @@ def read_and_process_tabular_data(data_path, keyspace, file_store="local"):
         partition_key= "partition_key_id"
     features_df.write.mode("append").partitionBy(partition_key).saveAsTable("myCatalog."+keyspace+"."+table_name)
     spark.stop()
-    print("summary table created in astra " + summary_table_name)
+    logger.info("summary table created in astra " + summary_table_name)
     return 1

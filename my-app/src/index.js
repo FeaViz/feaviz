@@ -1,28 +1,12 @@
-import React from "react";
-import ReactDom from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 
-import "./index.css";
-import Iframe from "react-iframe";
+ReactDOM.render(<App />, document.getElementById('root'));
 
-function Dashboard() {
-  return (
-    <Iframe
-      url="http://localhost:8088/r/5"
-      width="800px"
-      height="800px"
-      id="myId"
-      className="myClassname"
-      display="initial"
-      position="relative"
-    />
-  );
-}
-function DashboardList() {
-  return (
-    <section className="dashboardList">
-      <Dashboard />
-    </section>
-  );
-}
-
-ReactDom.render(<DashboardList />, document.getElementById("root"));
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: http://bit.ly/CRA-PWA
+serviceWorker.unregister();
