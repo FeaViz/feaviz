@@ -91,4 +91,4 @@ def read_and_process_data(images_data_path, keyspace, http_server_url,
         "myCatalog."+ keyspace +"."+ image_features_table_name)
     spark.stop()
     logger.info("Image features data written to table "+image_features_table_name)
-    return 1
+    return image_features_df.dtypes

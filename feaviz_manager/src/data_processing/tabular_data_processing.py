@@ -59,4 +59,4 @@ def read_and_process_tabular_data(data_path, keyspace, file_store="local"):
     features_df.write.mode("append").partitionBy(partition_key).saveAsTable("myCatalog."+keyspace+"."+table_name)
     spark.stop()
     logger.info("summary table created in astra " + summary_table_name)
-    return 1
+    return features_df.dtypes

@@ -2,7 +2,7 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    http_server_url: str = "http://localhost:9753"
+    http_server_url: str = "http://localhost:9753/object_data"
     keyspace = "nosql1"
 
     model_label_path: str = "/Users/lavanyamk/Documents/FeaViz/coco-yolo-v3/coco.names"
