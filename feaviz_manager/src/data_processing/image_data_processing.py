@@ -6,11 +6,13 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 import numpy as np
 from fastapi.logger import logger
+from pyspark.sql import Row
 
 
-def get_desc(img, network, labels, threshold, probability_minimum):
+def get_desc(img, labels, threshold, probability_minimum, model_cfg_path, model_weights_path):
     image = cv2.imread(img.split('//')[-1])
     image_input_shape = image.shape
+    network = cv2.dnn.readNetFromDarknet(model_cfg_path, model_weights_path)
     blob = cv2.dnn.blobFromImage(image, 1 / 255.0, (416, 416), swapRB=True, crop=False)
     layers_names_all = network.getLayerNames()
     layers_names_output = [layers_names_all[i[0] - 1] for i in network.getUnconnectedOutLayers()]
@@ -62,7 +64,7 @@ def read_and_process_data(images_data_path, keyspace, http_server_url,
     # Opening file, reading, eliminating whitespaces, and splitting by '\n', which in turn creates list
     labels = open(model_label_path).read().strip().split('\n')  # list of names
 
-    network = cv2.dnn.readNetFromDarknet(model_cfg_path, model_weights_path)
+
     image_features_table_name = images_data_path.split("/")[-1]
 
     spark = SparkSession.builder.appName("image_processing").getOrCreate()
@@ -79,7 +81,8 @@ def read_and_process_data(images_data_path, keyspace, http_server_url,
         StructField("class_labels", ArrayType(StringType()), False)
     ])
 
-    udf_image = udf(lambda x: get_desc(x, network, labels, threshold, probability_minimum), schema_added)
+    udf_image = udf(lambda x: get_desc(x, labels, threshold, probability_minimum,
+                                       model_cfg_path, model_weights_path), schema_added)
 
     features_df = img_features_df.select("image.origin", "image.height", "image.width", "image.nChannels", "image.mode") \
         .withColumnRenamed("origin", "image_path")
