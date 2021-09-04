@@ -1,0 +1,300 @@
+{
+    "dashboards": [
+        {
+            "__Dashboard__": {
+                "css": "",
+                "dashboard_title": "Ecommerce Detailed visualization",
+                "description": null,
+                "json_metadata": "{\"timed_refresh_immune_slices\": [], \"expanded_slices\": {}, \"refresh_frequency\": 0, \"default_filters\": \"{}\", \"color_scheme\": null, \"remote_id\": 11}",
+                "position_json": "{\"CHART-2dVxFBTd9k\":{\"children\":[],\"id\":\"CHART-2dVxFBTd9k\",\"meta\":{\"chartId\":132,\"height\":51,\"sliceName\":\"Table View -Ecommerce\",\"uuid\":\"1c940adf-256e-43c1-b448-4722c09c3e62\",\"width\":12},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-mmM_AGDLZ\"],\"type\":\"CHART\"},\"DASHBOARD_VERSION_KEY\":\"v2\",\"GRID_ID\":{\"children\":[\"ROW-mmM_AGDLZ\"],\"id\":\"GRID_ID\",\"parents\":[\"ROOT_ID\"],\"type\":\"GRID\"},\"HEADER_ID\":{\"id\":\"HEADER_ID\",\"meta\":{\"text\":\"Ecommerce Detailed visualization\"},\"type\":\"HEADER\"},\"ROOT_ID\":{\"children\":[\"GRID_ID\"],\"id\":\"ROOT_ID\",\"type\":\"ROOT\"},\"ROW-mmM_AGDLZ\":{\"children\":[\"CHART-2dVxFBTd9k\"],\"id\":\"ROW-mmM_AGDLZ\",\"meta\":{\"0\":\"ROOT_ID\",\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"}}",
+                "slices": [
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "olist.products_catalog",
+                            "datasource_type": "table",
+                            "id": 132,
+                            "params": "{\"adhoc_filters\": [], \"all_columns\": [\"product_category_name\", \"product_name_lenght\", \"product_description_lenght\", \"product_photos_qty\", \"product_weight_g\", \"product_length_cm\", \"product_height_cm\", \"product_width_cm\"], \"color_pn\": true, \"datasource\": \"25__table\", \"extra_form_data\": {}, \"groupby\": [], \"order_by_cols\": [], \"order_desc\": true, \"percent_metrics\": [], \"query_mode\": \"raw\", \"row_limit\": 10000, \"server_page_length\": 10, \"show_cell_bars\": true, \"slice_id\": 132, \"table_timestamp_format\": \"smart_date\", \"time_grain_sqla\": \"P1D\", \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"table\", \"remote_id\": 132, \"datasource_name\": \"products_catalog\", \"schema\": \"olist\", \"database_name\": \"ecommerce\"}",
+                            "query_context": "{\"datasource\":{\"id\":25,\"type\":\"table\"},\"force\":false,\"queries\":[{\"time_range\":\"No filter\",\"filters\":[],\"extras\":{\"time_grain_sqla\":\"P1D\",\"time_range_endpoints\":[\"inclusive\",\"exclusive\"],\"having\":\"\",\"having_druid\":[],\"where\":\"\"},\"applied_time_extras\":{},\"columns\":[\"product_category_name\",\"product_name_lenght\",\"product_description_lenght\",\"product_photos_qty\",\"product_weight_g\",\"product_length_cm\",\"product_height_cm\",\"product_width_cm\"],\"orderby\":[],\"annotation_layers\":[],\"row_limit\":10000,\"timeseries_limit\":0,\"order_desc\":true,\"url_params\":{},\"custom_params\":{},\"custom_form_data\":{},\"post_processing\":[]}],\"result_format\":\"json\",\"result_type\":\"full\"}",
+                            "slice_name": "Table View -Ecommerce",
+                            "viz_type": "table"
+                        }
+                    }
+                ],
+                "slug": null
+            }
+        }
+    ],
+    "datasources": [
+        {
+            "__SqlaTable__": {
+                "cache_timeout": null,
+                "columns": [
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "column_name": "product_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 776,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 25,
+                            "type": "TEXT",
+                            "uuid": "a225bd7c-9bb3-4545-8cb8-04826dad08ba",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "column_name": "product_category_name",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 777,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 25,
+                            "type": "TEXT",
+                            "uuid": "a3ba3aae-2754-4b61-918b-37c8fd6d5240",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "column_name": "product_name_lenght",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 778,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 25,
+                            "type": "DOUBLE PRECISION",
+                            "uuid": "3a6f3187-97e5-442a-aa45-4dd95cab21cc",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "column_name": "product_description_lenght",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 779,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 25,
+                            "type": "DOUBLE PRECISION",
+                            "uuid": "8bdc0d71-7d6d-46a5-98ad-92733dfed374",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "column_name": "product_photos_qty",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 780,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 25,
+                            "type": "DOUBLE PRECISION",
+                            "uuid": "e0454332-3daf-4de1-af81-b4a5b23cc9d3",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "column_name": "product_weight_g",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 781,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 25,
+                            "type": "DOUBLE PRECISION",
+                            "uuid": "105c6a21-7100-4984-8c91-094332382c35",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "column_name": "product_length_cm",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 782,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 25,
+                            "type": "DOUBLE PRECISION",
+                            "uuid": "4cb4c960-e4b9-46bb-a545-f1985c043a84",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "column_name": "product_height_cm",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 783,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 25,
+                            "type": "DOUBLE PRECISION",
+                            "uuid": "b68da2d0-8907-48a8-aed9-cf7030d089b6",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "column_name": "product_width_cm",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 784,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 25,
+                            "type": "DOUBLE PRECISION",
+                            "uuid": "3bd23761-4c40-4f4f-bca7-5c260e79d8fa",
+                            "verbose_name": null
+                        }
+                    }
+                ],
+                "database_id": 1,
+                "default_endpoint": null,
+                "description": null,
+                "extra": null,
+                "fetch_values_predicate": null,
+                "filter_select_enabled": false,
+                "main_dttm_col": null,
+                "metrics": [
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-03T07:31:20"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "COUNT(*)",
+                            "extra": null,
+                            "id": 32,
+                            "metric_name": "count",
+                            "metric_type": "count",
+                            "table_id": 25,
+                            "uuid": "2618f224-1e01-486e-b2ba-109c54a0b4b7",
+                            "verbose_name": "COUNT(*)",
+                            "warning_text": null
+                        }
+                    }
+                ],
+                "offset": 0,
+                "params": "{\"remote_id\": 25, \"database_name\": \"ecommerce\"}",
+                "schema": "olist",
+                "sql": null,
+                "table_name": "products_catalog",
+                "template_params": null
+            }
+        }
+    ]
+}
