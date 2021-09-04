@@ -1,0 +1,300 @@
+{
+    "dashboards": [
+        {
+            "__Dashboard__": {
+                "css": "",
+                "dashboard_title": "Image Data Visualization",
+                "description": null,
+                "json_metadata": "{\"timed_refresh_immune_slices\": [], \"expanded_slices\": {}, \"refresh_frequency\": 0, \"default_filters\": \"{}\", \"color_scheme\": null, \"remote_id\": 13}",
+                "position_json": "{\"CHART-PME1Altiv3\":{\"children\":[],\"id\":\"CHART-PME1Altiv3\",\"meta\":{\"chartId\":136,\"height\":87,\"sliceName\":\"Image_features\",\"uuid\":\"12293038-04de-4001-a343-af6af463df31\",\"width\":12},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-W8kw1ymCJa\"],\"type\":\"CHART\"},\"DASHBOARD_VERSION_KEY\":\"v2\",\"GRID_ID\":{\"children\":[\"ROW-W8kw1ymCJa\"],\"id\":\"GRID_ID\",\"parents\":[\"ROOT_ID\"],\"type\":\"GRID\"},\"HEADER_ID\":{\"id\":\"HEADER_ID\",\"meta\":{\"text\":\"Image Data Visualization\"},\"type\":\"HEADER\"},\"ROOT_ID\":{\"children\":[\"GRID_ID\"],\"id\":\"ROOT_ID\",\"type\":\"ROOT\"},\"ROW-W8kw1ymCJa\":{\"children\":[\"CHART-PME1Altiv3\"],\"id\":\"ROW-W8kw1ymCJa\",\"meta\":{\"0\":\"ROOT_ID\",\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"}}",
+                "slices": [
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "nosql1.image_view",
+                            "datasource_type": "table",
+                            "id": 136,
+                            "params": "{\"adhoc_filters\": [], \"all_columns\": [\"class_labels\", \"classes\", \"confidence_score\", \"height\", \"image_view\", \"mode\", \"nchannels\", \"width\"], \"color_pn\": true, \"datasource\": \"27__table\", \"extra_form_data\": {}, \"groupby\": [], \"metrics\": [], \"order_by_cols\": [], \"order_desc\": true, \"percent_metrics\": [], \"query_mode\": \"raw\", \"row_limit\": 1000, \"server_page_length\": 10, \"show_cell_bars\": true, \"slice_id\": 136, \"table_timestamp_format\": \"smart_date\", \"time_grain_sqla\": \"P1D\", \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"table\", \"remote_id\": 136, \"datasource_name\": \"image_view\", \"schema\": \"nosql1\", \"database_name\": \"Presto\"}",
+                            "query_context": "{\"datasource\":{\"id\":27,\"type\":\"table\"},\"force\":false,\"queries\":[{\"time_range\":\"No filter\",\"filters\":[],\"extras\":{\"time_grain_sqla\":\"P1D\",\"time_range_endpoints\":[\"inclusive\",\"exclusive\"],\"having\":\"\",\"having_druid\":[],\"where\":\"\"},\"applied_time_extras\":{},\"columns\":[\"class_labels\",\"classes\",\"confidence_score\",\"height\",\"image_view\",\"mode\",\"nchannels\",\"width\"],\"orderby\":[],\"annotation_layers\":[],\"row_limit\":1000,\"timeseries_limit\":0,\"order_desc\":true,\"url_params\":{},\"custom_params\":{},\"custom_form_data\":{},\"post_processing\":[]}],\"result_format\":\"json\",\"result_type\":\"full\"}",
+                            "slice_name": "Image_features",
+                            "viz_type": "table"
+                        }
+                    }
+                ],
+                "slug": null
+            }
+        }
+    ],
+    "datasources": [
+        {
+            "__SqlaTable__": {
+                "cache_timeout": null,
+                "columns": [
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "column_name": "image_path",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 797,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 27,
+                            "type": "VARCHAR",
+                            "uuid": "4bbc3413-57d3-4cd1-94a9-7fd616ec5ad0",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "column_name": "class_labels",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 798,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 27,
+                            "type": "VARCHAR",
+                            "uuid": "43aadb89-d4a3-4604-8e42-a7f76ad107a8",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "column_name": "classes",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 799,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 27,
+                            "type": "VARCHAR",
+                            "uuid": "754d9f80-2c6b-40c7-8afb-a23fc7a7002f",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "column_name": "confidence_score",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 800,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 27,
+                            "type": "VARCHAR",
+                            "uuid": "5959ce92-7dd0-48aa-bf02-eee4b6911c36",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "column_name": "height",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 801,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 27,
+                            "type": "INTEGER",
+                            "uuid": "5a589048-6d3d-428e-853f-8b2a0eeb3cde",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "column_name": "image_view",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 802,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 27,
+                            "type": "VARCHAR",
+                            "uuid": "37a9c7e6-e32b-492f-a898-6e33aa299df1",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "column_name": "mode",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 803,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 27,
+                            "type": "INTEGER",
+                            "uuid": "dde07a5d-1b5a-4125-abff-da084eff0ad6",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "column_name": "nchannels",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 804,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 27,
+                            "type": "INTEGER",
+                            "uuid": "ff72fc6f-4f05-4c4f-a52a-bace88cb2a15",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "column_name": "width",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 805,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 27,
+                            "type": "INTEGER",
+                            "uuid": "2ab21988-9c32-42ca-9a8c-0e26fe019e28",
+                            "verbose_name": null
+                        }
+                    }
+                ],
+                "database_id": 3,
+                "default_endpoint": null,
+                "description": null,
+                "extra": null,
+                "fetch_values_predicate": null,
+                "filter_select_enabled": false,
+                "main_dttm_col": null,
+                "metrics": [
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-09-04T13:02:07"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "count(*)",
+                            "extra": null,
+                            "id": 34,
+                            "metric_name": "count",
+                            "metric_type": null,
+                            "table_id": 27,
+                            "uuid": "74c06d65-6ace-43f8-ade5-4f832db5d21b",
+                            "verbose_name": null,
+                            "warning_text": null
+                        }
+                    }
+                ],
+                "offset": 0,
+                "params": "{\"remote_id\": 27, \"database_name\": \"Presto\"}",
+                "schema": "nosql1",
+                "sql": "-- drop table olist.coco_image_features\nselect * from image_features_table",
+                "table_name": "image_view",
+                "template_params": null
+            }
+        }
+    ]
+}
