@@ -7,6 +7,7 @@
 4. FastAPI
 5. OpenCV
 6. Object detection YOLO model link: https://www.kaggle.com/valentynsichkar/yolo-coco-data
+7. Olist e-commerce dataset https://www.kaggle.com/olistbr/brazilian-ecommerce
 
 Slide deck: https://docs.google.com/presentation/d/e/2PACX-1vRuX9Zd-Nt5xrsigXavF_Rb7lCXd8Wia8gR_zxjz0EsXHGh2ZnxnzH7ra1G1vGtbVcjyVQjNXdKkwPO/pub?start=false&loop=false&delayms=3000
 
