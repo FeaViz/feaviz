@@ -7286,7 +7286,7 @@
                     "ids": {
                       "description": "A list of item ids, useful when you don't know the column id",
                       "items": {
-                        "type": "string"
+                        "type": "int"
                       },
                       "type": "array"
                     },

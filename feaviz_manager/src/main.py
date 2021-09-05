@@ -23,8 +23,8 @@ def create_tabular_feature_visualization(tabular_data_path: DataPath):
 @app.post("/images")
 def create_image_feature_visualization(images_data_path: DataPath):
     dashboard_url = create_image_data_visualization(images_data_path.path, settings.keyspace, settings.http_server_url,
-                                    settings.model_label_path, settings.model_weights_path,
-                                    settings.model_cfg_path)
+                                                    settings.model_label_path, settings.model_weights_path,
+                                                    settings.model_cfg_path)
     return dashboard_url
 
 

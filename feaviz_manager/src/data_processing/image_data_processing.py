@@ -1,5 +1,6 @@
 import cv2
 import findspark
+
 findspark.init()
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
@@ -45,17 +46,18 @@ def get_desc(img, labels, threshold, probability_minimum, model_cfg_path, model_
                 confidences.append(float(confidence_current))
                 class_numbers.append(int(class_current))
                 class_labels.append(labels[class_current])
-    return Row(#"bounding_box",
-               "confidence_score",
-               "class",
-               "class_labels")(#bounding_boxes,
-                               confidences,
-                               class_numbers,
-                               class_labels)
+    return Row(  # "bounding_box",
+        "confidence_score",
+        "class",
+        "class_labels")(  # bounding_boxes,
+        confidences,
+        class_numbers,
+        class_labels)
+
 
 def read_and_process_data(images_data_path, keyspace, http_server_url,
-                                    model_label_path, model_weights_path,
-                                    model_cfg_path):
+                          model_label_path, model_weights_path,
+                          model_cfg_path):
     probability_minimum = 0.7
 
     # Setting threshold for non maximum suppression
@@ -63,7 +65,6 @@ def read_and_process_data(images_data_path, keyspace, http_server_url,
 
     # Opening file, reading, eliminating whitespaces, and splitting by '\n', which in turn creates list
     labels = open(model_label_path).read().strip().split('\n')  # list of names
-
 
     image_features_table_name = images_data_path.split("/")[-1]
 
@@ -88,10 +89,11 @@ def read_and_process_data(images_data_path, keyspace, http_server_url,
         .withColumnRenamed("origin", "image_path")
     features_df = features_df.withColumn("desc", udf_image("image_path")).select("*", "desc.*").drop("desc")  # .show()
     image_features_df = features_df.withColumn("image_view", concat(lit('<img src="' + http_server_url),
-                                                                    split(col("image_path"), images_data_path).getItem(1),
+                                                                    split(col("image_path"), images_data_path).getItem(
+                                                                        1),
                                                                     lit('"  width="150" height="200">')))
     image_features_df.write.mode("append").partitionBy("image_path").saveAsTable(
-        "myCatalog."+ keyspace +"."+ image_features_table_name)
+        "myCatalog." + keyspace + "." + image_features_table_name)
     spark.stop()
-    logger.info("Image features data written to table "+image_features_table_name)
+    logger.info("Image features data written to table " + image_features_table_name)
     return image_features_df.dtypes
