@@ -9,7 +9,8 @@ datetime_format = {
 
 }
 
-
+# Logic taken from https://github.com/metriql/metriql-superset/blob/main/metriql2superset/superset.py
+# Issue https://github.com/apache/superset/issues/16398
 class DatabaseOperation:
     superset_url: str
     session: Session
