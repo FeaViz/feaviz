@@ -8,51 +8,25 @@ from openapi_client.model.dashboard_rest_api_post import DashboardRestApiPost
 from openapi_client.model.dataset_rest_api_post import DatasetRestApiPost
 from openapi_client.model.inline_object5 import InlineObject5
 
+from superset import DatabaseOperation
+
 import json
 
 astradb_schema = "nosql1"
 table_name = "image_features_table"
 dashboard_name = "openapi_dashboard"
 base_url = "http://localhost:8088/api/v1"
+
+client = DatabaseOperation("http://localhost:8088", "admin", "admin")
+
 def create_chart_table(dashboard_id, datasource_id, chart_name, viz_type, columns):
     query_context={
   "datasource": {
     "id": datasource_id,
     "type": "table"
-  },
-  "force": "false",
-  "queries": [
-    {
-      "time_range": "No filter",
-      "filters": [],
-      "extras": {
-        "time_grain_sqla": "P1D",
-        "time_range_endpoints": [
-          "inclusive",
-          "exclusive"
-        ],
-        "having": "",
-        "having_druid": [],
-        "where": ""
-      },
-      "applied_time_extras": {},
-      "columns": columns,
-      "orderby": [],
-      "annotation_layers": [],
-      "row_limit": 10000,
-      "timeseries_limit": 0,
-      "order_desc": "true",
-      "url_params": {},
-      "custom_params": {},
-      "custom_form_data": {},
-      "post_processing": []
-    }
-  ],
-  "result_format": "json",
-  "result_type": "full"
+  }
 }
     data_params={"query_mode":"raw", "all_columns": columns}
-#     print(json.dumps(data_params))
     data={
     "dashboards": [
       dashboard_id
@@ -64,11 +38,33 @@ def create_chart_table(dashboard_id, datasource_id, chart_name, viz_type, column
     "slice_name": chart_name,
     "viz_type": viz_type
   }
-    return requests.post(url= base_url + '/chart/',headers=headers, json=data).json()
+    return client.session.post(url=base_url + '/chart/', json=data).json()
 
 
-def create_dashboard(name):
-    return requests.post(url= base_url + '/dashboard/',headers=headers, json={"dashboard_title": name, "published": "true"}).json()
+def create_chart_histogram(dashboard_id, datasource_id, chart_name, viz_type, columns):
+    query_context={
+  "datasource": {
+    "id": datasource_id,
+    "type": "table"
+  }
+}
+    data_params={
+  "all_columns_x": columns,
+  "viz_type": viz_type
+}
+    data={
+    "dashboards": [
+      dashboard_id
+    ],
+    "datasource_id": datasource_id,
+    "datasource_type": "table",
+    "params":  json.dumps(data_params),
+    "query_context": json.dumps(query_context),
+    "slice_name": chart_name,
+    "viz_type": viz_type
+  }
+    return client.session.post(url=base_url + '/chart/', json=data).json()
+
 
 configuration = openapi_client.Configuration(
     host="http://localhost:8088/api/v1",
@@ -128,9 +124,22 @@ with openapi_client.ApiClient(configuration) as api_client:
     # dashboards = dashboard_api.dashboard_post(body)
     # print(dashboards)
 
-from superset import DatabaseOperation
 
-client = DatabaseOperation("http://localhost:8088", "admin", "admin")
-payload = {"dashboard_title": "test", "published": "true"}
-response = client.session.post(url=base_url + "/dashboard", json=payload)
-print(response.json())
+payload = {"dashboard_title": "testtt", "published": "true"}
+dashboard_created_response = client.session.post(url=base_url + "/dashboard", json=payload)
+dashboard_created_id = dashboard_created_response.json()["id"]
+print(dashboard_created_id)
+
+response = create_chart_table(dashboard_created_id, dataset_id, "chart_testt", "table", ["image_path",
+        "class_labels",
+        "classes",
+        "confidence_score",
+        "height",
+        "image_view",
+        "mode",
+        "nchannels",
+        "width"])
+print(response)
+
+response = create_chart_histogram(dashboard_created_id, dataset_id, "chart_testt2", "histogram", ["height"])
+print(response)
