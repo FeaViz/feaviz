@@ -19,50 +19,88 @@ base_url = "http://localhost:8088/api/v1"
 
 client = DatabaseOperation("http://localhost:8088", "admin", "admin")
 
+
 def create_chart_table(dashboard_id, datasource_id, chart_name, viz_type, columns):
-    query_context={
-  "datasource": {
-    "id": datasource_id,
-    "type": "table"
-  }
-}
-    data_params={"query_mode":"raw", "all_columns": columns}
-    data={
-    "dashboards": [
-      dashboard_id
-    ],
-    "datasource_id": datasource_id,
-    "datasource_type": "table",
-    "params":  json.dumps(data_params),
-    "query_context": json.dumps(query_context),
-    "slice_name": chart_name,
-    "viz_type": viz_type
-  }
+    query_context = {
+        "datasource": {
+            "id": datasource_id,
+            "type": "table"
+        }
+    }
+    data_params = {"query_mode": "raw", "all_columns": columns}
+    data = {
+        "dashboards": [
+            dashboard_id
+        ],
+        "datasource_id": datasource_id,
+        "datasource_type": "table",
+        "params": json.dumps(data_params),
+        "query_context": json.dumps(query_context),
+        "slice_name": chart_name,
+        "viz_type": viz_type
+    }
     return client.session.post(url=base_url + '/chart/', json=data).json()
 
 
 def create_chart_histogram(dashboard_id, datasource_id, chart_name, viz_type, columns):
-    query_context={
-  "datasource": {
-    "id": datasource_id,
-    "type": "table"
-  }
-}
-    data_params={
-  "all_columns_x": columns,
-  "viz_type": viz_type
-}
-    data={
-    "dashboards": [
-      dashboard_id
-    ],
-    "datasource_id": datasource_id,
-    "datasource_type": "table",
-    "params":  json.dumps(data_params),
-    "query_context": json.dumps(query_context),
-    "slice_name": chart_name,
-    "viz_type": viz_type
-  }
+    query_context = {
+        "datasource": {
+            "id": datasource_id,
+            "type": "table"
+        }
+    }
+    data_params = {
+        "all_columns_x": columns,
+        "viz_type": viz_type
+    }
+    data = {
+        "dashboards": [
+            dashboard_id
+        ],
+        "datasource_id": datasource_id,
+        "datasource_type": "table",
+        "params": json.dumps(data_params),
+        "query_context": json.dumps(query_context),
+        "slice_name": chart_name,
+        "viz_type": viz_type
+    }
+    return client.session.post(url=base_url + '/chart/', json=data).json()
+
+
+def create_chart_bar(dashboard_id, datasource_id, chart_name, viz_type, columns, group_by_columns):
+    query_context = {
+        "datasource": {
+            "id": datasource_id,
+            "type": "table"
+        },
+        "queries": [{
+            "columns": [
+                columns
+            ],
+            "metrics": [
+                "count"
+            ]
+        }
+        ]
+    }
+    data_params = {
+        "groupby": group_by_columns,
+        "viz_type": viz_type,
+        "metrics": ["count"],
+        "order_desc": True
+    }
+
+    data = {
+        "dashboards": [
+            dashboard_id
+        ],
+        "datasource_id": datasource_id,
+        "datasource_type": "table",
+        "params": json.dumps(data_params),
+        "query_context": json.dumps(query_context),
+        "slice_name": chart_name,
+        "viz_type": viz_type
+    }
     return client.session.post(url=base_url + '/chart/', json=data).json()
 
 
@@ -124,22 +162,24 @@ with openapi_client.ApiClient(configuration) as api_client:
     # dashboards = dashboard_api.dashboard_post(body)
     # print(dashboards)
 
-
 payload = {"dashboard_title": "testtt", "published": "true"}
 dashboard_created_response = client.session.post(url=base_url + "/dashboard", json=payload)
 dashboard_created_id = dashboard_created_response.json()["id"]
 print(dashboard_created_id)
 
 response = create_chart_table(dashboard_created_id, dataset_id, "chart_testt", "table", ["image_path",
-        "class_labels",
-        "classes",
-        "confidence_score",
-        "height",
-        "image_view",
-        "mode",
-        "nchannels",
-        "width"])
+                                                                       "class_labels",
+                                                                       "classes",
+                                                                       "confidence_score",
+                                                                       "height",
+                                                                       "image_view",
+                                                                       "mode",
+                                                                       "nchannels",
+                                                                       "width"])
 print(response)
 
 response = create_chart_histogram(dashboard_created_id, dataset_id, "chart_testt2", "histogram", ["height"])
+print(response)
+
+response = create_chart_bar(dashboard_created_id, dataset_id, "chart_testt3", "dist_bar", ["confidence_score"], ["confidence_score"])
 print(response)
